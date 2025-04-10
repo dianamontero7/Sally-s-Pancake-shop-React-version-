@@ -3,7 +3,29 @@ import { useState } from "react";
 function App() {
   // PART 2
   // This is an array of strings that represent orders
-  var orders = ["pancakes", "coffee", "coffee"]
+  // var orders = ["pancakes", "coffee", "coffee", "pancakes"]
+
+  const [orders, setOrders] = useState (
+    [
+      "pancakes",
+      "coffee",
+      "coffee",
+      "pancakes"
+    ]
+  );
+
+  function createOrder (order){
+    const newOrders = [...orders, order]
+    setOrders(newOrders);
+    console.log(newOrders);
+  }
+
+  function removeOrder(indexToRemove) {
+    const newOrders = orders.filter((_, index) => index !== indexToRemove);
+    setOrders(newOrders);
+    console.log(newOrders);
+  }
+
 
 
   var ordersHTMLArray = [];
@@ -15,6 +37,9 @@ function App() {
 
       var pancakesOrderHTMLElement = <div className="order">
                                       <img src="./pancakes.png" alt="pancake" />
+                                      <button onClick={()=>
+                                        removeOrder(i)
+                                      }>Ready</button>
                                     </div>
       ordersHTMLArray.push(pancakesOrderHTMLElement);
 
@@ -22,6 +47,9 @@ function App() {
 
       var coffeeOrderHTMLElement = <div className="order">
                                      <img src="./coffee.png" alt="coffee" />
+                                     <button onClick={()=> 
+                                      removeOrder(i)
+                                     }>Ready</button>
                                   </div>
       ordersHTMLArray.push(coffeeOrderHTMLElement);
       
@@ -34,7 +62,7 @@ function App() {
         <h1>Orders</h1>
         <div id="orders">
           {/* PART 1 */}
-          {/* Embed the array of order elements here */}
+          {ordersHTMLArray}
 
         </div>
       </div>
@@ -49,7 +77,8 @@ function App() {
               onClick={function () {
                 {/* PART 3 & PART 4 */}
                 //Create a new order for pancakes
-
+                  createOrder("pancakes")
+               
               }}
             >
               Create Order
@@ -63,7 +92,7 @@ function App() {
               onClick={function () {
                 {/* PART 3 & PART 4 */}
                 //Create a new order for coffee
-
+                  createOrder("coffee")
               }}
             >
               Create Order

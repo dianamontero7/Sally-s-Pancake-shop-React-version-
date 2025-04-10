@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "loader-runner": "^4.3.0"
+  }
+}
